@@ -1,0 +1,15 @@
+/home/vali/Playlist_Manager/Playlist_Manager/bin/Debug/net9.0/Playlist_Manager
+/home/vali/Playlist_Manager/Playlist_Manager/bin/Debug/net9.0/Playlist_Manager.deps.json
+/home/vali/Playlist_Manager/Playlist_Manager/bin/Debug/net9.0/Playlist_Manager.runtimeconfig.json
+/home/vali/Playlist_Manager/Playlist_Manager/bin/Debug/net9.0/Playlist_Manager.dll
+/home/vali/Playlist_Manager/Playlist_Manager/bin/Debug/net9.0/Playlist_Manager.pdb
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.GeneratedMSBuildEditorConfig.editorconfig
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.AssemblyInfoInputs.cache
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.AssemblyInfo.cs
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.csproj.CoreCompileInputs.cache
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.sourcelink.json
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.dll
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/refint/Playlist_Manager.dll
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.pdb
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/Playlist_Manager.genruntimeconfig.cache
+/home/vali/Playlist_Manager/Playlist_Manager/obj/Debug/net9.0/ref/Playlist_Manager.dll
