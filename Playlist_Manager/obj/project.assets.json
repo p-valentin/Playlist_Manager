@@ -430,24 +430,31 @@
     ]
   },
   "packageFolders": {
-    "/home/vali/.nuget/packages/": {}
+    "C:\\Users\\budea\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vali/Playlist_Manager/Playlist_Manager/Playlist_Manager.csproj",
+      "projectUniqueName": "C:\\Users\\budea\\Playlist_Manager\\Playlist_Manager\\Playlist_Manager.csproj",
       "projectName": "Playlist_Manager",
-      "projectPath": "/home/vali/Playlist_Manager/Playlist_Manager/Playlist_Manager.csproj",
-      "packagesPath": "/home/vali/.nuget/packages/",
-      "outputPath": "/home/vali/Playlist_Manager/Playlist_Manager/obj/",
+      "projectPath": "C:\\Users\\budea\\Playlist_Manager\\Playlist_Manager\\Playlist_Manager.csproj",
+      "packagesPath": "C:\\Users\\budea\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\budea\\Playlist_Manager\\Playlist_Manager\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/vali/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\budea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -501,7 +508,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/vali/.dotnet/sdk/9.0.308/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

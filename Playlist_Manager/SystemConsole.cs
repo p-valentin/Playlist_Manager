@@ -1,14 +1,16 @@
 namespace Playlist_Manager;
-
-public class SystemConsole
+public class SystemConsole : IConsoleWrapper
 {
-    public void Print (String message)
+    public void Print(string msg)
     {
-        Console.WriteLine(message);
+        Console.WriteLine(msg);
     }
 
-    public void Read()
+    public string Read()
     {
-        Console.ReadLine();
+        string text = Console.ReadLine();
+        if (text == null)
+            return "";
+        return text;
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Playlist_Manager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b4e807d30998f96ea2a1883a4c6c3482ca80888")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efd409876a74c5405d594ba0ecf029b1ab52acd3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Playlist_Manager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Playlist_Manager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
