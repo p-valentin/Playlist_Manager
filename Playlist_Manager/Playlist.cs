@@ -5,6 +5,12 @@ public class Playlist
     public string Name { get; set; }
     public List<MediaItem> Items { get; set; }
 
+    public Playlist()
+    {
+        Name = string.Empty;
+        Items = new List<MediaItem>();
+    }
+
     public Playlist(string name)
     {
         Name = name;

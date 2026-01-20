@@ -1,6 +1,7 @@
 namespace Playlist_Manager;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlaylistManager
 {
@@ -16,20 +17,21 @@ public class PlaylistManager
         _view = view;
     }
     
-    public void LoadData(string playlistName)
+    public void LoadData()
     {
+        string playlistName = _view.Read();
         try
         {
             CurrentPlaylist = _storage.Load(playlistName);
-            _view.Print("Playlist-ul a fost incarcat cu succes.");
+            if (CurrentPlaylist == null)
+            {
+                CurrentPlaylist = new Playlist(playlistName);
+            }
         }
         catch (Exception ex)
         {
             _view.Print("Eroare la incarcare: " + ex.Message);
-            
-            //Daca nu exista, cream unul gol
-            CurrentPlaylist = new Playlist();
-            CurrentPlaylist.Name = playlistName;
+            CurrentPlaylist = new Playlist(playlistName);
         }
     }
 
@@ -40,7 +42,7 @@ public class PlaylistManager
 
         List<Song> result = CurrentPlaylist.Items
             .OfType<Song>()
-            .Where(song => song.Artist.ToLower() == artist.ToLower())
+            .Where(song => string.Equals(song.Artist, artist, StringComparison.OrdinalIgnoreCase))
             .ToList();
 
         return result;
@@ -51,12 +53,6 @@ public class PlaylistManager
         if (CurrentPlaylist == null)
             return 0;
 
-        double totalSeconds = 0;
-        foreach (var item in CurrentPlaylist.Items)
-        {
-            totalSeconds += item.Duration.TotalSeconds;
-        }
-
-        return totalSeconds;
+        return CurrentPlaylist.Items.Sum(item => item.Duration.TotalSeconds);
     }
 }

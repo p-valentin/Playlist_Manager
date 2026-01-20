@@ -4,9 +4,9 @@ using Moq;
 
 public class PlaylistManagerTests
 {
-     private Mock<IStorageService> _storageMock;
-    private Mock<IConsoleWrapper> _consoleMock;
-    private PlaylistManager _manager;
+    private readonly Mock<IStorageService> _storageMock;
+    private readonly Mock<IConsoleWrapper> _consoleMock;
+    private readonly PlaylistManager _manager;
 
     public PlaylistManagerTests()
     {
@@ -20,77 +20,37 @@ public class PlaylistManagerTests
     }
 
     [Fact]
-    public void LoadData_ReturnsPlaylist_WhenPlaylistExists()
+    public void Test_SearchByArtist_ReturnsCorrectSongs()
     {
-        // Arrange
-        Playlist playlist = new Playlist();
-        playlist.Name = "Test";
+        Playlist playlist = new Playlist("Test");
+        playlist.Items.Add(new Song("Song A", TimeSpan.FromMinutes(3), "Artist1", "Album1"));
+        playlist.Items.Add(new Song("Song B", TimeSpan.FromMinutes(4), "artist1", "Album2"));
+        playlist.Items.Add(new Song("Song C", TimeSpan.FromMinutes(5), "Artist2", "Album3"));
+        playlist.Items.Add(new PodcastEpisode("Episode", TimeSpan.FromMinutes(10), "Host", 1));
 
-        _storageMock
-            .Setup(s => s.Load("Test"))
-            .Returns(playlist);
+        _consoleMock.Setup(c => c.Read()).Returns("Test");
+        _storageMock.Setup(s => s.Load("Test")).Returns(playlist);
 
-        // Act
-        Playlist result = _manager.LoadData("Test");
+        _manager.LoadData();
+        List<Song> result = _manager.SearchByArtist("Artist1");
 
-        // Assert
-        Assert.NotNull(result);
-        Assert.Equal("Test", result.Name);
-
-        _storageMock.Verify(s => s.Load("Test"), Times.Once);
+        Assert.Equal(2, result.Count);
+        Assert.All(result, song => Assert.Equal("Artist1", song.Artist, ignoreCase: true));
     }
 
     [Fact]
-    public void LoadData_PrintsMessage_WhenPlaylistDoesNotExist()
+    public void Test_GetTotalDuration_CalculatesCorrectly()
     {
-        // Arrange
-        _storageMock
-            .Setup(s => s.Load("Missing"))
-            .Returns((Playlist)null);
+        Playlist playlist = new Playlist("Test");
+        playlist.Items.Add(new Song("Song", TimeSpan.FromMinutes(3), "A", "B"));
+        playlist.Items.Add(new PodcastEpisode("Episode", TimeSpan.FromMinutes(10), "H", 1));
 
-        // Act
-        Playlist result = _manager.LoadData("Missing");
+        _consoleMock.Setup(c => c.Read()).Returns("Test");
+        _storageMock.Setup(s => s.Load("Test")).Returns(playlist);
 
-        // Assert
-        Assert.Null(result);
+        _manager.LoadData();
+        double totalSeconds = _manager.GetTotalDuration();
 
-        _consoleMock.Verify(
-            c => c.Print(It.IsAny<string>()),
-            Times.Once
-        );
-    }
-
-    [Fact]
-    public void GetTotalDuration_ReturnsCorrectSum()
-    {
-        // Arrange
-        Playlist playlist = new Playlist();
-        playlist.Name = "Test";
-
-        Song song = new Song
-        {
-            Id = Guid.NewGuid(),
-            Title = "Song",
-            Duration = TimeSpan.FromMinutes(3),
-            Artist = "A",
-            Album = "B"
-        };
-
-        PodcastEpisode episode = new PodcastEpisode
-        {
-            Id = Guid.NewGuid(),
-            Title = "Episode",
-            Duration = TimeSpan.FromMinutes(10),
-            Host = "H",
-            EpisodeNumber = 1
-        };
-
-        playlist.Items.Add(song);
-        playlist.Items.Add(episode);
-
-        // Act
-        int totalSeconds = _manager.GetTotalDuration(playlist);
-
-        // Assert
         Assert.Equal(780, totalSeconds);
+    }
 }
