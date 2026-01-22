@@ -150,6 +150,12 @@ public static class AppPages
           <label for=""playlistName"">Playlist name</label>
           <input id=""playlistName"" value=""Demo"" />
         </div>
+        <div>
+          <label for=""quickSelect"">Quick select</label>
+          <select id=""quickSelect"">
+            <option value="""">Select...</option>
+          </select>
+        </div>
       </div>
       <div class=""actions"">
         <button id=""createBtn"">Create playlist</button>
@@ -227,6 +233,30 @@ public static class AppPages
     const playlistItems = document.getElementById('playlistItems');
     const deleteBtn = document.getElementById('deleteBtn');
     let currentPlaylist = null;
+    const quickSelect = document.getElementById('quickSelect');
+
+    async function refreshQuickSelect() {
+      try {
+        const res = await fetch('/api/playlists');
+        if (res.ok) {
+           const list = await res.json();
+           quickSelect.innerHTML = '<option value="""">Select...</option>';
+           list.forEach(n => {
+             const opt = document.createElement('option');
+             opt.value = n;
+             opt.textContent = n;
+             quickSelect.appendChild(opt);
+           });
+        }
+      } catch(e) { console.error(e); }
+    }
+
+    quickSelect.addEventListener('change', () => {
+       if(quickSelect.value) {
+           nameInput.value = quickSelect.value;
+           document.getElementById('loadBtn').click();
+       }
+    });
 
     function updateFieldVisibility() {
       const isSong = itemType.value === 'Song';
@@ -316,6 +346,7 @@ public static class AppPages
       if (response.ok && data && data.items) {
         currentPlaylist = data;
         renderPlaylist(currentPlaylist);
+        refreshQuickSelect();
       }
     });
 
@@ -347,6 +378,7 @@ public static class AppPages
       if (response.ok) {
         currentPlaylist = null;
         renderEmptyState();
+        refreshQuickSelect();
       }
     });
 
@@ -377,6 +409,8 @@ public static class AppPages
         renderPlaylist(currentPlaylist);
       }
     });
+
+    refreshQuickSelect();
   </script>
 </body>
 </html>";

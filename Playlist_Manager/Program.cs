@@ -20,6 +20,11 @@ var app = builder.Build();
 
 app.MapGet("/", () => Results.Content(AppPages.IndexHtml, "text/html"));
 
+app.MapGet("/api/playlists", (IStorageService storage) =>
+{
+    return Results.Ok(storage.ListPlaylists());
+});
+
 app.MapGet("/api/playlists/{name}", (string name, IStorageService storage) =>
 {
     Playlist playlist = storage.Load(name);

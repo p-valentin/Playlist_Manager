@@ -168,6 +168,25 @@ public class DatabaseStorage : IStorageService
         return playlist;
     }
 
+    public IEnumerable<string> ListPlaylists()
+    {
+        using SqliteConnection connection = new SqliteConnection(_connectionString);
+        connection.Open();
+        EnsureSqlite();
+        EnsureSchema(connection);
+
+        using SqliteCommand listCmd = connection.CreateCommand();
+        listCmd.CommandText = "SELECT Name FROM Playlists ORDER BY Name;";
+
+        List<string> result = new List<string>();
+        using SqliteDataReader reader = listCmd.ExecuteReader();
+        while (reader.Read())
+        {
+            result.Add(reader.GetString(0));
+        }
+        return result;
+    }
+
     public bool Delete(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
